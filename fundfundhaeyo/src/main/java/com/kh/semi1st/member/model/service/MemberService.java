@@ -30,7 +30,7 @@ public class MemberService {
 		if(result > 0) {
 			commit(conn);
 		}else {
-			close(conn);
+			rollback(conn);
 		}
 		
 		close(conn);
@@ -38,5 +38,17 @@ public class MemberService {
 		return result;
 		
 	}
+	
+	public Member searchIdMember(String userName, String email) {
+		
+		Connection conn = getConnection();
+		 Member m = new MemberDao().searchIdMember(conn, userName, email);
+		
+		 close(conn);
+		 return m;
+		 
+	}
+	
+	
 	
 }

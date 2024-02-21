@@ -56,4 +56,28 @@
 		  )
 	</entry>
 	
+	<entry key="searchIdMember">
+		SELECT
+		       USER_NO
+		     , USER_NAME
+		     , USER_EMAIL
+		  FROM TB_MEMBER
+		 WHERE USER_NAME = ?
+		   AND USER_EMAIL = ?
+		   AND USER_STATUS = 'Y'
+	</entry>
+	
+	<entry key="searchPwdMember">
+		SELECT 
+		       USER_NO
+		     , USER_NAME
+		     , USER_ID
+		     , USER_EMAIL
+		  FROM TB_MEMBER
+		 WHERE USER_NAME = ?
+		   AND USER_ID = ?
+		   AND USER_EMAIL = ?
+		   AND USER_STATUS = 'Y'
+	</entry>
+	
 </properties>

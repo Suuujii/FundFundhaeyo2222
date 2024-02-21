@@ -1,4 +1,4 @@
-package com.kh.semi1st.product.controller;
+package com.kh.semi1st.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi1st.member.model.service.MemberService;
+import com.kh.semi1st.member.model.vo.Member;
+
 /**
- * Servlet implementation class ProductSortDeadlineController
+ * Servlet implementation class SearchIdController
  */
-@WebServlet("/ss")
-public class ProductSortDeadlineController extends HttpServlet {
+@WebServlet("/deadline.pr")
+public class SearchIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductSortDeadlineController() {
+    public SearchIdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +29,18 @@ public class ProductSortDeadlineController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TBU
-		request.setAttribute("currentPage", "deadline");
-		request.getRequestDispatcher("views/product/productSortDeadline.jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		
+		String userName = request.getParameter("userName");
+		String email = request.getParameter("userEmail");
+		
+		Member m = new MemberService().searchIdMember(userName, email);
+		
+		if(m != null) {
+			request.setAttribute("m", m);
+			request.getRequestDispatcher("views/product/productSortDeadline.jsp").forward(request, response);
+		}
+	
 	}
 
 	/**

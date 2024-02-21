@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import static com.kh.semi1st.common.JDBCTemplate.*;
 import com.kh.semi1st.member.model.vo.Member;
 
@@ -106,4 +108,37 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public Member searchIdMember(Connection conn, String userName, String email) {
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchIdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userName);
+			pstmt.setString(2, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member();
+				m.setUserId("userId");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
 }
