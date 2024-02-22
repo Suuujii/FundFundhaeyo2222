@@ -31,15 +31,17 @@ public class SearchIdController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String userName = request.getParameter("userName");
-		String email = request.getParameter("userEmail");
+		request.getRequestDispatcher("views/member/memberSearchId.jsp").forward(request, response);
+
+		//		String userName = request.getParameter("userName");
+//		String email = request.getParameter("userEmail");
 		
-		Member m = new MemberService().searchIdMember(userName, email);
 		
-		if(m != null) {
-			request.setAttribute("m", m);
-			request.getRequestDispatcher("views/product/productSortDeadline.jsp").forward(request, response);
-		}
+//		Member m = new MemberService().searchIdMember(userName, email);
+		
+//		if(m != null) {
+//			request.setAttribute("m", m);
+//		}
 	
 	}
 
